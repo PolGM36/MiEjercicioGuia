@@ -29,17 +29,19 @@
         private void InitializeComponent()
         {
             this.Peticion = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.button1 = new System.Windows.Forms.Button();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.Servicios_btn = new System.Windows.Forms.Button();
+            this.cont = new System.Windows.Forms.Label();
             this.Peticion.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,10 +57,39 @@
             this.Peticion.Controls.Add(this.textBox1);
             this.Peticion.Controls.Add(this.label2);
             this.Peticion.Controls.Add(this.label1);
-            this.Peticion.Location = new System.Drawing.Point(214, 168);
+            this.Peticion.Location = new System.Drawing.Point(166, 86);
             this.Peticion.Name = "Peticion";
             this.Peticion.Size = new System.Drawing.Size(1139, 630);
             this.Peticion.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.900001F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(29, 372);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(115, 39);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Altura:";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(156, 374);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(205, 38);
+            this.textBox2.TabIndex = 11;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radioButton3.Location = new System.Drawing.Point(433, 376);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(248, 36);
+            this.radioButton3.TabIndex = 10;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "Dime si soy alto";
+            this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -121,39 +152,10 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Petición";
             // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.radioButton3.Location = new System.Drawing.Point(433, 376);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(248, 36);
-            this.radioButton3.TabIndex = 10;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Dime si soy alto";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(156, 374);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(205, 38);
-            this.textBox2.TabIndex = 11;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.900001F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(29, 372);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(115, 39);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Altura:";
-            // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.Gainsboro;
-            this.button2.Location = new System.Drawing.Point(214, 82);
+            this.button2.Location = new System.Drawing.Point(166, 0);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(174, 51);
             this.button2.TabIndex = 13;
@@ -164,7 +166,7 @@
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.Gainsboro;
-            this.button3.Location = new System.Drawing.Point(214, 842);
+            this.button3.Location = new System.Drawing.Point(166, 760);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(217, 51);
             this.button3.TabIndex = 14;
@@ -172,11 +174,33 @@
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // Servicios_btn
+            // 
+            this.Servicios_btn.BackColor = System.Drawing.Color.Gainsboro;
+            this.Servicios_btn.Location = new System.Drawing.Point(980, 744);
+            this.Servicios_btn.Name = "Servicios_btn";
+            this.Servicios_btn.Size = new System.Drawing.Size(325, 51);
+            this.Servicios_btn.TabIndex = 15;
+            this.Servicios_btn.Text = "¿Cuántos servicios?";
+            this.Servicios_btn.UseVisualStyleBackColor = false;
+            this.Servicios_btn.Click += new System.EventHandler(this.Servicios_btn_Click);
+            // 
+            // cont
+            // 
+            this.cont.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cont.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.900001F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cont.Location = new System.Drawing.Point(980, 811);
+            this.cont.Name = "cont";
+            this.cont.Size = new System.Drawing.Size(337, 114);
+            this.cont.TabIndex = 16;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2150, 1132);
+            this.Controls.Add(this.cont);
+            this.Controls.Add(this.Servicios_btn);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.Peticion);
@@ -203,6 +227,8 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button Servicios_btn;
+        private System.Windows.Forms.Label cont;
     }
 }
 

@@ -7,6 +7,8 @@
 #include <sys/socket.h>
 #include <pthread.h>
 
+int contador;
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void *AtenderCliente (void *socket)
 {
@@ -33,7 +35,7 @@ void *AtenderCliente (void *socket)
 		char *p = strtok(peticion, "/");
 		int codigo = atoi(p);
 		
-		if(codigo!=0)
+		if((codigo!=0)&&(codigo!=4))
 		{
 			p = strtok(NULL, "/");
 			strcpy (nombre,p);
@@ -59,7 +61,7 @@ void *AtenderCliente (void *socket)
 				strcpy(respuesta,"NO");
 			}
 		}
-		else
+		else if(codigo ==3)
 		{
 			p = strtok(NULL, "/");
 			float altura = atof(p);
@@ -72,11 +74,20 @@ void *AtenderCliente (void *socket)
 				sprintf(respuesta, "%s: eres bajo", nombre);
 			}
 		}
-		
+		else
+		{
+			sprintf(respuesta, "%d", contador);
+		}
 		if(codigo!=0)
 		{
 			printf("Respuesta: %s\n", respuesta);
 			write(sock_conn,respuesta, strlen(respuesta));
+		}
+		if((codigo==1)||(codigo==2)||(codigo==3))
+		{
+			pthread_mutex_lock( &mutex );
+			contador++;
+			pthread_mutex_unlock( &mutex );
 		}
 		
 	}
@@ -110,7 +121,8 @@ if(listen(sock_listen, 3) < 0)
 	printf("Error en el listen");
 }
 
-int i;
+contador = 0;
+int i=0;
 int sockets[100];
 pthread_t thread;
 
@@ -123,7 +135,7 @@ for(;;)
 	sockets[i] = sock_conn;
 	
 	pthread_create (&thread, NULL, AtenderCliente,&sockets[i]); 
-	
+	i++;
 }
 
 //for(i=0;i<5;i++)
