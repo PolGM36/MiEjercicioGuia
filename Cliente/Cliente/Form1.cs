@@ -51,7 +51,7 @@ namespace Cliente
 
                 if (mensaje == "SI")
                 {
-                    MessageBox.Show("Tu nombr es bonito.");
+                    MessageBox.Show("Tu nombre es bonito.");
                 }
                 else
                 {

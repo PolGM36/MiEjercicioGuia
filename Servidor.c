@@ -5,42 +5,19 @@
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
+#include <pthread.h>
 
-int main(int argc, char *argv[])
+
+void *AtenderCliente (void *socket)
 {
+	int sock_conn;
+	int *s;
+	s= (int *) socket;
+	sock_conn = *s;
 	
-int sock_conn, sock_listen, ret;
-struct sockaddr_in serv_adr;
-char peticion[512];
-char respuesta[512];
-
-if((sock_listen = socket(AF_INET, SOCK_STREAM, 0)) < 0)
-{
-	printf("Error creant socket");
-}
-
-memset(&serv_adr, 0, sizeof(serv_adr));
-serv_adr.sin_family = AF_INET;
-serv_adr.sin_addr.s_addr = htonl(INADDR_ANY);
-serv_adr.sin_port = htons(9070);
-
-if(bind(sock_listen, (struct sockaddr *) &serv_adr, sizeof(serv_adr)) < 0)
-{
-	printf("Error al bind");
-}
-
-if(listen(sock_listen, 3) < 0)
-{
-	printf("Error en el listen");
-}
-
-int i;
-
-for(i=0;i<5;i++)
-{
-	printf("Escuchando\n");
-	sock_conn = accept(sock_listen, NULL, NULL);
-	printf ("He recibido conexion\n");
+	char peticion[512];
+	char respuesta[512];
+	int ret;
 	
 	int terminar = 0;
 	
@@ -69,7 +46,7 @@ for(i=0;i<5;i++)
 		}		
 		else if(codigo ==1)
 		{
-			sprintf(respuesta, "%d,",strlen(nombre));
+			sprintf(respuesta, "%d",strlen(nombre));
 		}
 		else if(codigo ==2) 
 		{
@@ -106,7 +83,52 @@ for(i=0;i<5;i++)
 	
 	close(sock_conn);
 }
+int main(int argc, char *argv[])
+{
 	
-}	
+int sock_conn, sock_listen;
+struct sockaddr_in serv_adr;
+
+
+if((sock_listen = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+{
+	printf("Error creant socket");
+}
+
+memset(&serv_adr, 0, sizeof(serv_adr));
+serv_adr.sin_family = AF_INET;
+serv_adr.sin_addr.s_addr = htonl(INADDR_ANY);
+serv_adr.sin_port = htons(9070);
+
+if(bind(sock_listen, (struct sockaddr *) &serv_adr, sizeof(serv_adr)) < 0)
+{
+	printf("Error al bind");
+}
+
+if(listen(sock_listen, 3) < 0)
+{
+	printf("Error en el listen");
+}
+
+int i;
+int sockets[100];
+pthread_t thread;
+
+for(;;)
+{
+	printf("Escuchando\n");
+	sock_conn = accept(sock_listen, NULL, NULL);
+	printf ("He recibido conexion\n");
 	
+	sockets[i] = sock_conn;
 	
+	pthread_create (&thread, NULL, AtenderCliente,&sockets[i]); 
+	
+}
+
+//for(i=0;i<5;i++)
+//{
+	//pthread_join (thread[i], NULL);
+//}	
+	
+}
